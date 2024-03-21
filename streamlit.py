@@ -4,7 +4,6 @@ import pandas as pd
 
 # Fungsi untuk menampilkan produk sesuai urutan nama
 def display_product_order_by_name():
-    try:
         # Koneksi ke database
         connection = mysql.connector.connect(
             host='localhost',
@@ -13,39 +12,15 @@ def display_product_order_by_name():
             database='db_ecommerce'
         )
 
-        # cursor = connection.cursor()
-        # cursor.callproc("DisplayProductOrderbyName")
-
-        # # Menampilkan hasil
-        # result = cursor.fetchall()
-        # if not result:
-        #     st.write("Tidak ada produk yang tersedia.")
-        # else:
-        #     st.write("Daftar Produk (Urutan Nama):")
-        #     for row in result:
-        #         st.write(row)
-
-        # cursor.close()
-        # connection.close()
-
         cursor = connection.cursor()
 
-        # cursor.callproc("DisplayProductOrderbyName")
-
-        # # Menampilkan hasil
-        # data = cursor.fetchall()
-        #Perform operations here
-
+        # Perform operations here
         cursor.execute("SELECT * FROM products")
         data = cursor.fetchall()
 
         # Print results.
         df = pd.DataFrame(data, columns=cursor.column_names)
         st.dataframe(df)
-
-    except mysql.connector.Error as error:
-        st.error("Terjadi kesalahan saat mengambil data produk: {}".format(error))
-
 
 # Fungsi untuk menerapkan diskon pada produk
 def apply_discount_to_product(product_id, discount):
