@@ -43,6 +43,7 @@ try:
         cursor = connection.cursor()
 
         cursor.callproc("DisplayProductOrderbyName")
+        connection.commit()
 
         # cursor.callproc("ApplyDiscountToProduct", (2, 20.00))
         # connection.commit()
