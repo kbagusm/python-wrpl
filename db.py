@@ -44,14 +44,26 @@ try:
 
         cursor.callproc("DisplayProductOrderbyName")
 
+        # cursor.callproc("ApplyDiscountToProduct", (2, 20.00))
+        # connection.commit()
+                
+        # cursor.callproc("AddtoCart", (1, 3, 2))
+        # connection.commit
+                
+        # cursor.callproc("SearchbyProductandOrder", ("kit", "desc"))
+        # connection.commit
+                
+        # cursor.callproc("InsertCustomer", ('sophie_baker', 'sophie.baker@email.com', 'password30', 'Sophie Baker', '987 Maple Drive, Uptown', '222-333-4444', True))
+        # connection.commit
+            
+        # cursor.callproc("InsertTransaction", (31, '123 Pine Lane, Outskirts', 199.95, 'Shipped'))
+        # connection.commit
+
+
         results = cursor.stored_results()
         for result in results:
             for row in result.fetchall():
                 print(row)
-
-        # cursor.callproc("ApplyDiscountToProduct", (2, 20.00))
-
-        # connection.commit()
 
         cursor.close()
 
