@@ -2,34 +2,30 @@ import streamlit as st
 import mysql.connector
 import pandas as pd
 
+
 # Fungsi untuk menampilkan produk sesuai urutan nama
 def display_product_order_by_name():
-        # Koneksi ke database
-        connection = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='',
-            database='db_ecommerce'
-        )
+    # Koneksi ke database
+    connection = mysql.connector.connect(
+        host="localhost", user="root", password="", database="db_ecommerce"
+    )
 
-        cursor = connection.cursor()
+    cursor = connection.cursor()
 
-        # Perform operations here
-        cursor.execute("SELECT * FROM products")
-        data = cursor.fetchall()
+    # Perform operations here
+    cursor.execute("SELECT * FROM products")
+    data = cursor.fetchall()
 
-        # Print results.
-        df = pd.DataFrame(data, columns=cursor.column_names)
-        st.dataframe(df)
+    # Print results.
+    df = pd.DataFrame(data, columns=cursor.column_names)
+    st.dataframe(df)
+
 
 # Fungsi untuk menerapkan diskon pada produk
 def apply_discount_to_product(product_id, discount):
     # Koneksi ke database
     connection = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='',
-        database='db_ecommerce'
+        host="localhost", user="root", password="", database="db_ecommerce"
     )
 
     cursor = connection.cursor()
@@ -43,14 +39,12 @@ def apply_discount_to_product(product_id, discount):
     cursor.close()
     connection.close()
 
+
 # Fungsi untuk menambahkan produk ke keranjang
 def add_to_cart(product_id, user_id, quantity):
     # Koneksi ke database
     connection = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='',
-        database='db_ecommerce'
+        host="localhost", user="root", password="", database="db_ecommerce"
     )
 
     cursor = connection.cursor()
@@ -59,50 +53,73 @@ def add_to_cart(product_id, user_id, quantity):
 
     # Menampilkan hasil
     result = cursor.fetchall()
-    st.write(quantity, "produk dengan ID", product_id, "telah ditambahkan ke keranjang pengguna dengan ID", user_id)
+    st.write(
+        quantity,
+        "produk dengan ID",
+        product_id,
+        "telah ditambahkan ke keranjang pengguna dengan ID",
+        user_id,
+    )
 
     cursor.close()
     connection.close()
+
 
 # Fungsi untuk mencari produk berdasarkan nama dan urutan
 def search_by_product_and_order(product_name, order_direction):
     # Koneksi ke database
     connection = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='',
-        database='db_ecommerce'
+        host="localhost", user="root", password="", database="db_ecommerce"
     )
 
     cursor = connection.cursor()
     cursor.callproc("SearchbyProductandOrder", [product_name, order_direction])
     connection.commit()
-    
+
     ini_list = []
     # Menampilkan hasil
     result = cursor.fetchall()
-    st.write("Hasil pencarian produk dengan nama", product_name, "dengan urutan", order_direction)
+    st.write(
+        "Hasil pencarian produk dengan nama",
+        product_name,
+        "dengan urutan",
+        order_direction,
+    )
     for result in cursor.stored_results():
         for row in result.fetchall():
             ini_list.append(row)
 
-    df = pd.DataFrame(ini_list, columns=['ProductID', 'SellerID', 'Name', 'Description', 'Price', 'Stock', 'CategoryID'])
+    df = pd.DataFrame(
+        ini_list,
+        columns=[
+            "ProductID",
+            "SellerID",
+            "Name",
+            "Description",
+            "Price",
+            "Stock",
+            "CategoryID",
+        ],
+    )
     st.dataframe(df)
     cursor.close()
     connection.close()
 
+
 # Fungsi untuk menyisipkan pelanggan baru
-def insert_customer(username, email, password, full_name, address, phone_number, is_active):
+def insert_customer(
+    username, email, password, full_name, address, phone_number, is_active
+):
     # Koneksi ke database
     connection = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='',
-        database='db_ecommerce'
+        host="localhost", user="root", password="", database="db_ecommerce"
     )
 
     cursor = connection.cursor()
-    cursor.callproc("InsertCustomer", [username, email, password, full_name, address, phone_number, is_active])
+    cursor.callproc(
+        "InsertCustomer",
+        [username, email, password, full_name, address, phone_number, is_active],
+    )
     connection.commit()
 
     # Menampilkan hasil
@@ -111,18 +128,18 @@ def insert_customer(username, email, password, full_name, address, phone_number,
     cursor.close()
     connection.close()
 
+
 # Fungsi untuk menyisipkan transaksi baru
 def insert_transaction(customer_id, shipping_address, total_amount, status):
     # Koneksi ke database
     connection = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='',
-        database='db_ecommerce'
+        host="localhost", user="root", password="", database="db_ecommerce"
     )
 
     cursor = connection.cursor()
-    cursor.callproc("InsertTransaction", [customer_id, shipping_address, total_amount, status])
+    cursor.callproc(
+        "InsertTransaction", [customer_id, shipping_address, total_amount, status]
+    )
     connection.commit()
 
     # Menampilkan hasil
@@ -131,11 +148,19 @@ def insert_transaction(customer_id, shipping_address, total_amount, status):
     cursor.close()
     connection.close()
 
+
 # Membuat aplikasi Streamlit
 def main():
     st.title("Aplikasi Web untuk Interaksi dengan Stored Procedure")
 
-    menu = ["Tampilkan Produk", "Terapkan Diskon", "Tambahkan ke Keranjang", "Cari Produk", "Tambahkan Pelanggan", "Tambahkan Transaksi"]
+    menu = [
+        "Tampilkan Produk",
+        "Terapkan Diskon",
+        "Tambahkan ke Keranjang",
+        "Cari Produk",
+        "Tambahkan Pelanggan",
+        "Tambahkan Transaksi",
+    ]
     choice = st.sidebar.selectbox("Pilih Aksi", menu)
 
     if choice == "Tampilkan Produk":
@@ -158,21 +183,26 @@ def main():
             search_by_product_and_order(product_name, order_direction.lower())
     elif choice == "Tambahkan Pelanggan":
         username = st.text_input("Masukkan Username")
-        email = st.text_input("Masukkan Email") 
+        email = st.text_input("Masukkan Email")
         password = st.text_input("Masukkan Password", type="password")
         full_name = st.text_input("Masukkan Nama Lengkap")
         address = st.text_input("Masukkan Alamat")
         phone_number = st.text_input("Masukkan Nomor Telepon")
         is_active = st.checkbox("Aktifkan Akun?")
         if st.button("Tambahkan Pelanggan"):
-            insert_customer(username, email, password, full_name, address, phone_number, is_active)
+            insert_customer(
+                username, email, password, full_name, address, phone_number, is_active
+            )
     elif choice == "Tambahkan Transaksi":
         customer_id = st.number_input("Masukkan ID Pelanggan", min_value=1, step=1)
         shipping_address = st.text_input("Masukkan Alamat Pengiriman")
-        total_amount = st.number_input("Masukkan Total Jumlah", min_value=0.0, step=0.01)
+        total_amount = st.number_input(
+            "Masukkan Total Jumlah", min_value=0.0, step=0.01
+        )
         status = st.selectbox("Pilih Status", ["Pending", "Shipped", "Delivered"])
         if st.button("Tambahkan Transaksi"):
             insert_transaction(customer_id, shipping_address, total_amount, status)
+
 
 if __name__ == "__main__":
     main()
