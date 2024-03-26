@@ -1,0 +1,24 @@
+cookie:
+  expiry_days: 30
+  key: keybro
+  name: cookie
+credentials:
+  usernames:
+    davidl:
+      email: david@gmail.com
+      logged_in: false
+      name: David Lois
+      password: $2b$12$b4h/AmFtDmHNkqJOP3OU6uxHL7W003s10R6nmWPVGkPOEFIZYXZF2
+    rbriggs:
+      email: rbriggs@gmail.com
+      logged_in: false
+      name: Rebecca Briggs
+      password: $2b$12$SMsBKmrNxmw9HvHGXIwtxeLVj2gSU2Ux07jjOtSKPiHhfJPn7NzDe
+    test:
+      email: test@test.com
+      logged_in: false
+      name: Test
+      password: $2b$12$/gwclrSiMlLnUNfsxcKkA.Q3zjmlhGl1PqVpzR7Vn3ugUN6zf3GJK
+preauthorized:
+  emails:
+  - melsby@gmail.com
