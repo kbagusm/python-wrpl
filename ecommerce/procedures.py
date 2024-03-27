@@ -31,9 +31,6 @@ def apply_discount_to_product(product_id, discount):
     result = cursor.fetchall()
     st.write("Diskon berhasil diterapkan pada produk dengan ID", product_id)
 
-    cursor.close()
-    connection.close()
-
 
 # Fungsi untuk menambahkan produk ke keranjang
 def add_to_cart(product_id, user_id, quantity):
@@ -50,9 +47,6 @@ def add_to_cart(product_id, user_id, quantity):
         "telah ditambahkan ke keranjang pengguna dengan ID",
         user_id,
     )
-
-    cursor.close()
-    connection.close()
 
 
 # Fungsi untuk mencari produk berdasarkan nama dan urutan
@@ -88,8 +82,6 @@ def search_by_product_and_order(product_name, order_direction):
         ],
     )
     st.dataframe(df)
-    cursor.close()
-    connection.close()
 
 
 # Fungsi untuk menyisipkan pelanggan baru
@@ -107,9 +99,6 @@ def insert_customer(
     # Menampilkan hasil
     st.write("Pelanggan", full_name, "berhasil disisipkan.")
 
-    cursor.close()
-    connection.close()
-
 
 # Fungsi untuk menyisipkan transaksi baru
 def insert_transaction(customer_id, shipping_address, total_amount, status):
@@ -122,6 +111,3 @@ def insert_transaction(customer_id, shipping_address, total_amount, status):
 
     # Menampilkan hasil
     st.write("Transaksi berhasil disisipkan.")
-
-    cursor.close()
-    connection.close()

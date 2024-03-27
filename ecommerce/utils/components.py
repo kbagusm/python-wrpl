@@ -37,6 +37,7 @@ def sidebar(authenticator):
 
 
 def on_beli_click(name, description, price, product_id):
+    st.session_state.title = "Checkout"
     st.session_state.product_choice = {
         "name": name,
         "description": description,
@@ -53,8 +54,8 @@ def product_card(name, description, price, product_id):
         st.write("ID: ", product_id)
         st.button(
             "Buy",
-            on_click=on_beli_click(name, description, price, product_id),
-            key=product_id,
+            on_click=lambda: on_beli_click(name, description, price, product_id),
+            key=name,
         )
 
 
@@ -82,14 +83,21 @@ def tampilkan_produk():
 
 def checkout_product():
     st.session_state.title = "Tokomplit"
-    time.sleep(1)
-    st.success("Thank you for your purchase!")
     time.sleep(3)
+
+    st.success("Thank you for your purchase!")
+
+    time.sleep(1)
+
+    st.session_state.product_choice = None
+
+
+def cancel():
+    st.session_state.title = "Tokomplit"
     st.session_state.product_choice = None
 
 
 def checkout():
-    st.session_state.title = "Checkout"
     with st.container(border=True):
         st.subheader(st.session_state.product_choice["name"])
         st.write(st.session_state.product_choice["description"])
@@ -100,6 +108,7 @@ def checkout():
             key=st.session_state.product_choice["product_id"],
             on_click=checkout_product,
         )
+        st.button("Cancel", key="cancel", on_click=cancel)
 
 
 def terapkan_diskon():
