@@ -2,15 +2,16 @@ import mysql.connector
 import pandas as pd
 import streamlit as st
 
+# Koneksi ke database
+connection = mysql.connector.connect(
+    host="localhost", user="root", password="", database="wrpl"
+)
+
+cursor = connection.cursor()
+
 
 # Fungsi untuk menampilkan produk sesuai urutan nama
 def display_product_order_by_name():
-    # Koneksi ke database
-    connection = mysql.connector.connect(
-        host="localhost", user="root", password="", database="wrpl"
-    )
-
-    cursor = connection.cursor()
 
     # Perform operations here
     cursor.execute("SELECT * FROM products")
@@ -18,17 +19,14 @@ def display_product_order_by_name():
 
     # Print results.
     df = pd.DataFrame(data, columns=cursor.column_names)
-    st.dataframe(df)
+
+    return df
 
 
 # Fungsi untuk menerapkan diskon pada produk
 def apply_discount_to_product(product_id, discount):
     # Koneksi ke database
-    connection = mysql.connector.connect(
-        host="localhost", user="root", password="", database="wrpl"
-    )
 
-    cursor = connection.cursor()
     cursor.callproc("ApplyDiscountToProduct", [product_id, discount])
     connection.commit()
 
@@ -43,11 +41,7 @@ def apply_discount_to_product(product_id, discount):
 # Fungsi untuk menambahkan produk ke keranjang
 def add_to_cart(product_id, user_id, quantity):
     # Koneksi ke database
-    connection = mysql.connector.connect(
-        host="localhost", user="root", password="", database="wrpl"
-    )
 
-    cursor = connection.cursor()
     cursor.callproc("AddtoCart", [product_id, user_id, quantity])
     connection.commit()
 
@@ -67,11 +61,7 @@ def add_to_cart(product_id, user_id, quantity):
 # Fungsi untuk mencari produk berdasarkan nama dan urutan
 def search_by_product_and_order(product_name, order_direction):
     # Koneksi ke database
-    connection = mysql.connector.connect(
-        host="localhost", user="root", password="", database="wrpl"
-    )
 
-    cursor = connection.cursor()
     cursor.callproc("SearchbyProductandOrder", [product_name, order_direction])
     connection.commit()
 
@@ -110,11 +100,7 @@ def insert_customer(
     username, email, password, full_name, address, phone_number, is_active
 ):
     # Koneksi ke database
-    connection = mysql.connector.connect(
-        host="localhost", user="root", password="", database="wrpl"
-    )
 
-    cursor = connection.cursor()
     cursor.callproc(
         "InsertCustomer",
         [username, email, password, full_name, address, phone_number, is_active],
@@ -131,11 +117,7 @@ def insert_customer(
 # Fungsi untuk menyisipkan transaksi baru
 def insert_transaction(customer_id, shipping_address, total_amount, status):
     # Koneksi ke database
-    connection = mysql.connector.connect(
-        host="localhost", user="root", password="", database="wrpl"
-    )
 
-    cursor = connection.cursor()
     cursor.callproc(
         "InsertTransaction", [customer_id, shipping_address, total_amount, status]
     )

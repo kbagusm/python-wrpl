@@ -9,6 +9,11 @@ credentials:
       logged_in: false
       name: David Lois
       password: $2b$12$b4h/AmFtDmHNkqJOP3OU6uxHL7W003s10R6nmWPVGkPOEFIZYXZF2
+    nail:
+      email: nail@test.com
+      logged_in: false
+      name: Nail
+      password: $2b$12$gE78Li6SnGCKBWuxBfncnOgCq.lnVZUZL3okk5ACrSzQMov5ioLDu
     rbriggs:
       email: rbriggs@gmail.com
       logged_in: false

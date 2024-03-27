@@ -91,6 +91,8 @@ def main():
             try:
                 if authenticator.reset_password(st.session_state["username"]):
                     st.success("Password modified successfully")
+                    with open("config.yaml", "w") as file:
+                        yaml.dump(config, file, default_flow_style=False)
             except Exception as e:
                 st.error(e)
     elif choice == "Ubah Data Profil" and authentication_status:
@@ -98,6 +100,8 @@ def main():
             try:
                 if authenticator.update_user_details(st.session_state["username"]):
                     st.success("Entries updated successfully")
+                    with open("config.yaml", "w") as file:
+                        yaml.dump(config, file, default_flow_style=False)
             except Exception as e:
                 st.error(e)
     else:
