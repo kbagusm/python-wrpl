@@ -11,16 +11,13 @@ cursor = connection.cursor()
 
 
 # Fungsi untuk menampilkan produk sesuai urutan nama
-def display_product_order_by_name():
+def get_product_order_by_name():
 
     # Perform operations here
     cursor.execute("SELECT * FROM products")
     data = cursor.fetchall()
 
-    # Print results.
-    df = pd.DataFrame(data, columns=cursor.column_names)
-
-    return df
+    return data
 
 
 # Fungsi untuk menerapkan diskon pada produk
