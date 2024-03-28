@@ -109,7 +109,7 @@ def main():
                 email_of_registered_user,
                 _,
                 _,
-            ) = authenticator.register_user(preauthorization=False)
+            ) = authenticator.register_user(pre_authorization=False)
             if email_of_registered_user:
                 st.success("User registered successfully")
                 with open("config.yaml", "w") as file:

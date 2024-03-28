@@ -4,23 +4,32 @@ cookie:
   name: cookie
 credentials:
   usernames:
+    daoa:
+      email: daoa@gmail.com
+      logged_in: false
+      name: daoa
+      password: $2b$12$6TWq9/x5yhYsPiTzLyWHNe6iAdQ0G.d6AQbPbQ2VFdA9ezUnduzjy
     davidl:
       email: david@gmail.com
+      failed_login_attempts: 0
       logged_in: false
       name: David Lois
       password: $2b$12$b4h/AmFtDmHNkqJOP3OU6uxHL7W003s10R6nmWPVGkPOEFIZYXZF2
     nail:
       email: nail@test.com
+      failed_login_attempts: 0
       logged_in: false
       name: Nail
       password: $2b$12$gE78Li6SnGCKBWuxBfncnOgCq.lnVZUZL3okk5ACrSzQMov5ioLDu
     rbriggs:
       email: rbriggs@gmail.com
+      failed_login_attempts: 0
       logged_in: false
       name: Rebecca Briggs
       password: $2b$12$SMsBKmrNxmw9HvHGXIwtxeLVj2gSU2Ux07jjOtSKPiHhfJPn7NzDe
     test:
       email: test@test.com
+      failed_login_attempts: 0
       logged_in: false
       name: Test
       password: $2b$12$/gwclrSiMlLnUNfsxcKkA.Q3zjmlhGl1PqVpzR7Vn3ugUN6zf3GJK

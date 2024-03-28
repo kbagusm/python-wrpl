@@ -4,7 +4,7 @@ import streamlit as st
 
 # Koneksi ke database
 connection = mysql.connector.connect(
-    host="localhost", user="root", password="", database="wrpl"
+    host="localhost", user="root", password="", database="db_ecommerce"
 )
 
 cursor = connection.cursor()
