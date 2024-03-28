@@ -6,9 +6,15 @@ credentials:
   usernames:
     daoa:
       email: daoa@gmail.com
+      failed_login_attempts: 0
       logged_in: false
       name: daoa
       password: $2b$12$6TWq9/x5yhYsPiTzLyWHNe6iAdQ0G.d6AQbPbQ2VFdA9ezUnduzjy
+    david:
+      email: david@test.com
+      logged_in: false
+      name: david
+      password: $2b$12$9XPBuYLn9QOUu9l3tKAneeinROyawS7TRbT8wsulJT2NUuuGbHdyy
     davidl:
       email: david@gmail.com
       failed_login_attempts: 0
